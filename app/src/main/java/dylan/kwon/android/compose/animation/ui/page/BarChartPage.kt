@@ -6,6 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -13,14 +18,24 @@ import dylan.kwon.android.compose.animation.ui.composable.chart.HorizontalBarCha
 import dylan.kwon.android.compose.animation.ui.composable.chart.VerticalBarChart
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlin.random.Random
 
 @Composable
-fun BarChartPage(
-    data: ImmutableList<Float> = persistentListOf(
-        0.2f, 0.4f, 0.6f, 0.8f, 1.0f
-    )
-) {
+fun BarChartPage() {
+
+    var data by remember {
+        mutableStateOf(generateRandomData())
+    }
+    LaunchedEffect(Unit) {
+        while (isActive) {
+            delay(1500)
+            data = generateRandomData()
+        }
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -44,8 +59,16 @@ fun BarChartPage(
 
 @Composable
 @Preview(showBackground = true)
-fun BarChartPagePreview() {
+private fun BarChartPagePreview() {
     ComposeanimationTheme {
         BarChartPage()
     }
+}
+
+private fun generateRandomData(): ImmutableList<Float> {
+    return mutableListOf<Float>().apply {
+        repeat(5) {
+            this += Random.nextFloat()
+        }
+    }.toImmutableList()
 }

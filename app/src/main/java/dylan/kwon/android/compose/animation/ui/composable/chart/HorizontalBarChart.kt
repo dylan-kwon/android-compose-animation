@@ -1,7 +1,7 @@
 package dylan.kwon.android.compose.animation.ui.composable.chart
 
 import androidx.compose.animation.core.EaseInOut
-import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,8 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,29 +44,26 @@ fun HorizontalBarChart(
         horizontalAlignment = Alignment.Start
     ) {
         data.forEach { value ->
-            var isFirstComposition by rememberSaveable {
-                mutableStateOf(true)
-            }
-            if (isFirstComposition) LaunchedEffect(data) {
-                isFirstComposition = false
-            }
             BoxWithConstraints {
-                val width by animateDpAsState(
-                    targetValue = when (isFirstComposition) {
-                        true -> 0.dp
-                        else -> maxWidth.times(value)
-                    },
+                var valueState by remember {
+                    mutableFloatStateOf(0f)
+                }
+                val valueAnimation by animateFloatAsState(
+                    targetValue = valueState,
                     animationSpec = tween(
                         durationMillis = durationMillis,
                         easing = EaseInOut
                     ),
-                    label = "height-animation"
+                    label = "value-animation",
                 )
+                LaunchedEffect(value) {
+                    valueState = value
+                }
                 Bar(
                     modifier = Modifier
-                        .width(width)
+                        .width(maxWidth.times(valueAnimation))
                         .height(40.dp),
-                    label = value.toString()
+                    value = valueAnimation
                 )
             }
         }
@@ -76,7 +73,7 @@ fun HorizontalBarChart(
 @Composable
 private fun Bar(
     modifier: Modifier = Modifier,
-    label: String,
+    value: Float,
 ) {
     Row(
         modifier = modifier,
@@ -88,9 +85,12 @@ private fun Bar(
                 .weight(1f)
                 .fillMaxHeight()
                 .clip(RoundedCornerShape(topEndPercent = 25, bottomEndPercent = 25))
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.primaryContainer)
         )
-        Text(label)
+        val formatValue = remember(value) {
+            "%.2f".format(value)
+        }
+        Text(formatValue)
     }
 }
 
