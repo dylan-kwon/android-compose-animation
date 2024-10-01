@@ -10,10 +10,11 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,31 +42,14 @@ fun HorizontalBarChart(
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceEvenly,
-        horizontalAlignment = Alignment.Start
+        horizontalAlignment = Alignment.Start,
     ) {
         data.forEach { value ->
-            BoxWithConstraints {
-                var valueState by remember {
-                    mutableFloatStateOf(0f)
-                }
-                val valueAnimation by animateFloatAsState(
-                    targetValue = valueState,
-                    animationSpec = tween(
-                        durationMillis = durationMillis,
-                        easing = EaseInOut
-                    ),
-                    label = "value-animation",
-                )
-                LaunchedEffect(value) {
-                    valueState = value
-                }
-                Bar(
-                    modifier = Modifier
-                        .width(maxWidth.times(valueAnimation))
-                        .height(40.dp),
-                    value = valueAnimation
-                )
-            }
+            Bar(
+                modifier = Modifier.fillMaxWidth(),
+                value = value,
+                durationMillis = durationMillis
+            )
         }
     }
 }
@@ -74,23 +58,42 @@ fun HorizontalBarChart(
 private fun Bar(
     modifier: Modifier = Modifier,
     value: Float,
+    durationMillis: Int,
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .clip(RoundedCornerShape(topEndPercent = 25, bottomEndPercent = 25))
-                .background(MaterialTheme.colorScheme.primaryContainer)
-        )
-        val formatValue = remember(value) {
-            "%.2f".format(value)
+        var valueState by remember {
+            mutableFloatStateOf(0f)
         }
-        Text(formatValue)
+        val valueAnimation by animateFloatAsState(
+            targetValue = valueState,
+            animationSpec = tween(
+                durationMillis = durationMillis,
+                easing = EaseInOut
+            ),
+            label = "value-animation",
+        )
+        LaunchedEffect(value) {
+            valueState = value
+        }
+        BoxWithConstraints(
+            modifier = Modifier.weight(1f, fill = false)
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(maxWidth.times(valueAnimation))
+                    .height(40.dp)
+                    .clip(RoundedCornerShape(topEndPercent = 25, bottomEndPercent = 25))
+                    .background(MaterialTheme.colorScheme.primaryContainer)
+            )
+        }
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 8.dp),
+            text = "%.2f".format(valueAnimation)
+        )
     }
 }
 

@@ -10,9 +10,10 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -44,28 +45,11 @@ fun VerticalBarChart(
         verticalAlignment = Alignment.Bottom
     ) {
         data.forEach { value ->
-            BoxWithConstraints {
-                var valueState by remember {
-                    mutableFloatStateOf(0f)
-                }
-                val valueAnimation by animateFloatAsState(
-                    targetValue = valueState,
-                    animationSpec = tween(
-                        durationMillis = durationMillis,
-                        easing = EaseInOut
-                    ),
-                    label = "value-animation",
-                )
-                LaunchedEffect(value) {
-                    valueState = value
-                }
-                Bar(
-                    modifier = Modifier
-                        .height(maxHeight.times(valueAnimation))
-                        .width(40.dp),
-                    value = valueAnimation
-                )
-            }
+            Bar(
+                modifier = Modifier.fillMaxHeight(),
+                value = value,
+                durationMillis = durationMillis
+            )
         }
     }
 }
@@ -74,23 +58,43 @@ fun VerticalBarChart(
 private fun Bar(
     modifier: Modifier = Modifier,
     value: Float,
+    durationMillis: Int,
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        val formatValue = remember(value) {
-            "%.2f".format(value)
+        var valueState by remember {
+            mutableFloatStateOf(0f)
         }
-        Text(formatValue)
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .fillMaxSize()
-                .clip(RoundedCornerShape(topStartPercent = 25, topEndPercent = 25))
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
+        val valueAnimation by animateFloatAsState(
+            targetValue = valueState,
+            animationSpec = tween(
+                durationMillis = durationMillis,
+                easing = EaseInOut
+            ),
+            label = "value-animation",
         )
+        LaunchedEffect(value) {
+            valueState = value
+        }
+        Text(
+            modifier = Modifier
+                .padding(vertical = 8.dp),
+            text = "%.2f".format(valueAnimation)
+        )
+        BoxWithConstraints(
+            modifier = Modifier.weight(1f, fill = false)
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(40.dp)
+                    .height(maxHeight.times(valueAnimation))
+                    .clip(RoundedCornerShape(topStartPercent = 25, topEndPercent = 25))
+                    .background(MaterialTheme.colorScheme.tertiaryContainer)
+            )
+        }
     }
 }
 

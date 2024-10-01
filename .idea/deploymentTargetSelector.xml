@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-09-30T21:00:45.486079Z">
+        <DropdownSelection timestamp="2024-10-01T22:06:32.378525Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
@@ -21,6 +21,17 @@
       </SelectionState>
       <SelectionState runConfigName="VerticalBarChartPreview">
         <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="HorizontalBarChartPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2024-10-01T21:45:33.239670Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
     </selectionStates>
   </component>

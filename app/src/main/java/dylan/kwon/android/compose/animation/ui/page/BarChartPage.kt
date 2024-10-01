@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -43,8 +42,7 @@ fun BarChartPage() {
         HorizontalBarChart(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .padding(end = 16.dp),
+                .weight(1f),
             data = data,
         )
 
