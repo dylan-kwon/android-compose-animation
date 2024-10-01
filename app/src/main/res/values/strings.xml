@@ -4,5 +4,9 @@
     <string name="front">Front</string>
     <string name="back">Back</string>
 
+    <string name="go_to_back">Go to Back</string>
+
+    <string name="main">Compose Animations</string>
     <string name="flip_card">Flip Card</string>
+    <string name="bar_chart">Bar Chart</string>
 </resources>
