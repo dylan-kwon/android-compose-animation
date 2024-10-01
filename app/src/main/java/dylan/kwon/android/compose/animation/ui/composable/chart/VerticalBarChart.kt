@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -78,12 +79,15 @@ private fun Bar(
     label: String,
 ) {
     Column(
+        modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(label)
         Box(
-            modifier = modifier
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize()
                 .clip(RoundedCornerShape(topStartPercent = 25, topEndPercent = 25))
                 .background(MaterialTheme.colorScheme.primary)
         )
