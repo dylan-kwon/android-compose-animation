@@ -15,5 +15,8 @@ enum class Page(
     ),
     BarChart(
         nameResId = R.string.bar_chart
+    ),
+    Counter(
+        nameResId = R.string.counter
     )
 }

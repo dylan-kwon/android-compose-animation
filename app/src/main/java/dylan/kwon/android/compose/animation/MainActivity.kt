@@ -35,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dylan.kwon.android.compose.animation.ui.page.BarChartPage
+import dylan.kwon.android.compose.animation.ui.page.CounterPage
 import dylan.kwon.android.compose.animation.ui.page.FlipCardPage
 import dylan.kwon.android.compose.animation.ui.page.Page
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
@@ -95,6 +96,10 @@ fun MainScreen() {
 
                 Page.BarChart -> {
                     BarChartPage()
+                }
+
+                Page.Counter -> {
+                    CounterPage()
                 }
             }
         }

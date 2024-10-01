@@ -9,4 +9,6 @@
     <string name="main">Compose Animations</string>
     <string name="flip_card">Flip Card</string>
     <string name="bar_chart">Bar Chart</string>
+    <string name="counter">Counter</string>
+    <string name="random">Random</string>
 </resources>
