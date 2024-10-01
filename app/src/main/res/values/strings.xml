@@ -3,4 +3,6 @@
 
     <string name="front">Front</string>
     <string name="back">Back</string>
+
+    <string name="flip_card">Flip Card</string>
 </resources>
