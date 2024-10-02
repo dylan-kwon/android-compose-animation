@@ -10,8 +10,8 @@ enum class Page(
     Main(
         nameResId = R.string.main
     ),
-    FlipCard(
-        nameResId = R.string.flip_card
+    CardFlip(
+        nameResId = R.string.card_flip
     ),
     BarChart(
         nameResId = R.string.bar_chart

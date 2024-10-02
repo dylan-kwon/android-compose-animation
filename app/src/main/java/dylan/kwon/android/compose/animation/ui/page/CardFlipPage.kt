@@ -12,18 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dylan.kwon.android.compose.animation.ui.composable.flipcard.FlipCard
+import dylan.kwon.android.compose.animation.ui.composable.cardflip.CardFlip
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 
 @Composable
-fun FlipCardPage() {
+fun CardFlipPage() {
     Box {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            FlipCard(
+            CardFlip(
                 modifier = Modifier
                     .padding(horizontal = 50.dp)
                     .fillMaxWidth()
@@ -35,8 +35,8 @@ fun FlipCardPage() {
 
 @Composable
 @Preview(showBackground = true)
-fun FlipCardPagePreview() {
+fun CardFlipPagePreview() {
     ComposeanimationTheme {
-        FlipCardPage()
+        CardFlipPage()
     }
 }

@@ -36,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dylan.kwon.android.compose.animation.ui.page.BarChartPage
 import dylan.kwon.android.compose.animation.ui.page.CounterPage
-import dylan.kwon.android.compose.animation.ui.page.FlipCardPage
+import dylan.kwon.android.compose.animation.ui.page.CardFlipPage
 import dylan.kwon.android.compose.animation.ui.page.Page
 import dylan.kwon.android.compose.animation.ui.page.PieChartPage
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
@@ -86,13 +86,13 @@ fun MainScreen() {
         ) { targetPage ->
             when (targetPage) {
                 Page.Main -> MainList(
-                    onClickFlipCard = { page ->
+                    onClickCardFlip = { page ->
                         currentPage = page
                     }
                 )
 
-                Page.FlipCard -> {
-                    FlipCardPage()
+                Page.CardFlip -> {
+                    CardFlipPage()
                 }
 
                 Page.BarChart -> {
@@ -130,7 +130,7 @@ private fun BackButton(
 
 @Composable
 private fun MainList(
-    onClickFlipCard: (page: Page) -> Unit
+    onClickCardFlip: (page: Page) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -145,7 +145,7 @@ private fun MainList(
             MoveButton(
                 text = stringResource(page.nameResId),
                 onClick = {
-                    onClickFlipCard(page)
+                    onClickCardFlip(page)
                 }
             )
         }

@@ -1,4 +1,4 @@
-package dylan.kwon.android.compose.animation.ui.composable.flipcard
+package dylan.kwon.android.compose.animation.ui.composable.cardflip
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
@@ -9,16 +9,16 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 
 @Composable
-fun rememberFlipCardState(
+fun rememberCardFlipState(
     isFlipped: Boolean = false
-) = rememberSaveable(saver = FlipCardState.Saver) {
-    FlipCardState(
+) = rememberSaveable(saver = CardFlipState.Saver) {
+    CardFlipState(
         isFlipped = isFlipped,
     )
 }
 
 @Stable
-class FlipCardState(
+class CardFlipState(
     isFlipped: Boolean,
 ) {
 
@@ -35,7 +35,7 @@ class FlipCardState(
                 it.isFlipped
             )
         }, restore = {
-            FlipCardState(
+            CardFlipState(
                 it[0] as Boolean,
             )
         })

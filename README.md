@@ -2,7 +2,7 @@
 
 Compose Animation Practice Project
 
-| [Card Flip](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/flipcard/FlipCard.kt) | [BarChart](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/chart/bar/VerticalBarChart.kt) | [Counter](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/counter/Counter.kt) |
+| [Card Flip](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/cardflip/CardFlip.kt) | [BarChart](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/chart/bar/VerticalBarChart.kt) | [Counter](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/counter/Counter.kt) |
 |----------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | ![card_flip](./image/card_flip.gif)                                                                      | ![bar_chart](./image/bar_chart.gif)                                                                              | ![counter](./image/counter.gif)                                                                      |
 

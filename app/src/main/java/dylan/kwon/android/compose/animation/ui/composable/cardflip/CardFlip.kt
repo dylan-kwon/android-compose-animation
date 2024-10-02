@@ -1,4 +1,4 @@
-package dylan.kwon.android.compose.animation.ui.composable.flipcard
+package dylan.kwon.android.compose.animation.ui.composable.cardflip
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.EaseInOut
@@ -21,9 +21,9 @@ import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 
 
 @Composable
-fun FlipCard(
+fun CardFlip(
     modifier: Modifier,
-    state: FlipCardState = rememberFlipCardState(),
+    state: CardFlipState = rememberCardFlipState(),
     flipDuration: Int = 1_000
 ) {
     val color by animateColorAsState(
@@ -64,9 +64,9 @@ fun FlipCard(
 
 @Preview
 @Composable
-private fun FlipCardPreview() {
+private fun CardFlipPreview() {
     ComposeanimationTheme {
-        FlipCard(
+        CardFlip(
             modifier = Modifier.size(200.dp, 300.dp)
         )
     }
