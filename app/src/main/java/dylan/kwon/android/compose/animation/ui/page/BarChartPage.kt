@@ -13,8 +13,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import dylan.kwon.android.compose.animation.ui.composable.chart.HorizontalBarChart
-import dylan.kwon.android.compose.animation.ui.composable.chart.VerticalBarChart
+import dylan.kwon.android.compose.animation.ui.composable.chart.bar.HorizontalBarChart
+import dylan.kwon.android.compose.animation.ui.composable.chart.bar.VerticalBarChart
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList

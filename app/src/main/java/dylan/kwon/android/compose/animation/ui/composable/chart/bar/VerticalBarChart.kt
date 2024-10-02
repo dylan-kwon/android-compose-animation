@@ -1,4 +1,4 @@
-package dylan.kwon.android.compose.animation.ui.composable.chart
+package dylan.kwon.android.compose.animation.ui.composable.chart.bar
 
 import androidx.compose.animation.core.EaseInOut
 import androidx.compose.animation.core.animateFloatAsState

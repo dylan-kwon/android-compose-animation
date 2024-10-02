@@ -18,5 +18,8 @@ enum class Page(
     ),
     Counter(
         nameResId = R.string.counter
+    ),
+    PieChart(
+        nameResId = R.string.pie_chart
     )
 }

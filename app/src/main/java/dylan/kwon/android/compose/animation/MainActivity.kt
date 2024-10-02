@@ -38,6 +38,7 @@ import dylan.kwon.android.compose.animation.ui.page.BarChartPage
 import dylan.kwon.android.compose.animation.ui.page.CounterPage
 import dylan.kwon.android.compose.animation.ui.page.FlipCardPage
 import dylan.kwon.android.compose.animation.ui.page.Page
+import dylan.kwon.android.compose.animation.ui.page.PieChartPage
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 
 class MainActivity : ComponentActivity() {
@@ -100,6 +101,10 @@ fun MainScreen() {
 
                 Page.Counter -> {
                     CounterPage()
+                }
+
+                Page.PieChart -> {
+                    PieChartPage()
                 }
             }
         }
