@@ -35,8 +35,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dylan.kwon.android.compose.animation.ui.page.BarChartPage
-import dylan.kwon.android.compose.animation.ui.page.CounterPage
 import dylan.kwon.android.compose.animation.ui.page.CardFlipPage
+import dylan.kwon.android.compose.animation.ui.page.CircularProgressBarPage
+import dylan.kwon.android.compose.animation.ui.page.CounterPage
 import dylan.kwon.android.compose.animation.ui.page.Page
 import dylan.kwon.android.compose.animation.ui.page.PieChartPage
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
@@ -105,6 +106,10 @@ fun MainScreen() {
 
                 Page.PieChart -> {
                     PieChartPage()
+                }
+
+                Page.CircularProgressBar -> {
+                    CircularProgressBarPage()
                 }
             }
         }

@@ -12,4 +12,5 @@
     <string name="counter">Counter</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="random">Random</string>
+    <string name="circular_progress_bar">Circular ProgressBar</string>
 </resources>

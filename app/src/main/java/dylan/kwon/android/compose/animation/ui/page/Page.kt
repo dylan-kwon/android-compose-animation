@@ -21,5 +21,9 @@ enum class Page(
     ),
     PieChart(
         nameResId = R.string.pie_chart
+    ),
+    CircularProgressBar(
+        nameResId = R.string.circular_progress_bar
     )
+
 }
