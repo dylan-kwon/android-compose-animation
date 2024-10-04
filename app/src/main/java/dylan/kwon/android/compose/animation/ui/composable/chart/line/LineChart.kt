@@ -1,5 +1,6 @@
 package dylan.kwon.android.compose.animation.ui.composable.chart.line
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,10 +26,10 @@ fun LineChart(
     animationDuration: Int = 1000
 ) {
     val maxValue = remember(data) {
-        data.flatMap { it.values }.maxBy { it }
+        data.flatMap { it.values }.maxByOrNull { it } ?: 0f
     }
     val minValue = remember(data) {
-        data.flatMap { it.values }.minBy { it }
+        data.flatMap { it.values }.minByOrNull { it } ?: 0f
     }
 
     Canvas(modifier) {
