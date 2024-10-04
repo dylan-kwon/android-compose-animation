@@ -24,6 +24,8 @@ enum class Page(
     ),
     CircularProgressBar(
         nameResId = R.string.circular_progress_bar
-    )
-
+    ),
+    LineChart(
+        nameResId = R.string.line_chart
+    ),
 }
