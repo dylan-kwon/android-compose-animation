@@ -4,7 +4,7 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-03T19:47:00.013846Z">
+        <DropdownSelection timestamp="2024-10-07T17:34:13.268022Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
@@ -16,28 +16,6 @@
       <SelectionState runConfigName="CircularProgressbarPreview_Zero">
         <option name="selectionMode" value="DROPDOWN" />
         <DropdownSelection timestamp="2024-10-03T20:11:30.770367Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="CircularProgressbarPreview_Half">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-03T19:48:34.171620Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
-            </handle>
-          </Target>
-        </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="PieChartPagePreview">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-03T20:10:53.430890Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/dylan/.android/avd/Pixel_Fold_API_VanillaIceCream.avd" />
@@ -67,6 +45,9 @@
           </Target>
         </DropdownSelection>
         <DialogSelection />
+      </SelectionState>
+      <SelectionState runConfigName="LineChartPreview">
+        <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
   </component>

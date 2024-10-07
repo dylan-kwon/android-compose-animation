@@ -1,16 +1,22 @@
 package dylan.kwon.android.compose.animation.ui.composable.chart.line
 
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.animateOffsetAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
@@ -25,44 +31,56 @@ fun LineChart(
     strokeWidth: Dp = 2.dp,
     animationDuration: Int = 1000
 ) {
+    var canvasSize by remember {
+        mutableStateOf(Size.Unspecified)
+    }
     val maxValue = remember(data) {
         data.flatMap { it.values }.maxByOrNull { it } ?: 0f
     }
     val minValue = remember(data) {
         data.flatMap { it.values }.minByOrNull { it } ?: 0f
     }
-
-    Canvas(modifier) {
-        data.forEach { lineCharData ->
-
-            val offsetList = lineCharData.values.mapIndexed { i, e ->
-                val xOffset = calcXOffset(
-                    canvasWidth = size.width,
-                    dotSize = dotSize,
-                    dataSize = lineCharData.values.size,
-                    index = i
+    val animatedData = with(LocalDensity.current) {
+        data.map {
+            it.values.mapIndexed { index, value ->
+                animateOffsetAsState(
+                    targetValue = calcOffset(
+                        canvasSize = canvasSize,
+                        dotSize = dotSize,
+                        dataSize = it.values.size,
+                        index = index,
+                        value = value,
+                        maxValue = maxValue,
+                        minValue = minValue
+                    ),
+                    animationSpec = tween(
+                        durationMillis = animationDuration
+                    ),
+                    label = "offset-animation"
                 )
-                val yOffset = calcYOffset(
-                    canvasHeight = size.height,
-                    dotSize = dotSize,
-                    value = e,
-                    maxValue = maxValue,
-                    minValue = minValue
-                )
-                Offset(xOffset, yOffset)
             }
-
-            offsetList.forEachIndexed { index, offset ->
-                val nextOffset = offsetList.getOrNull(index + 1)
+        }
+    }
+    Canvas(modifier) {
+        if (canvasSize != size) {
+            canvasSize = size
+        }
+        if (canvasSize == Size.Unspecified) {
+            return@Canvas
+        }
+        animatedData.forEachIndexed { i, offsets ->
+            val color = data[i].color
+            offsets.forEachIndexed { j, offset ->
+                val nextOffset = offsets.getOrNull(j + 1)
                 if (nextOffset != null) drawLine(
-                    color = lineCharData.color,
-                    start = offset,
-                    end = nextOffset,
+                    color = color,
+                    start = offset.value,
+                    end = nextOffset.value,
                     strokeWidth = strokeWidth.toPx()
                 )
                 drawCircle(
-                    color = lineCharData.color,
-                    center = offset,
+                    color = color,
+                    center = offset.value,
                     radius = dotSize.div(2).toPx()
                 )
             }
@@ -70,7 +88,33 @@ fun LineChart(
     }
 }
 
-private fun DrawScope.calcXOffset(
+private fun Density.calcOffset(
+    canvasSize: Size,
+    dotSize: Dp,
+    dataSize: Int,
+    index: Int,
+    value: Float,
+    maxValue: Float,
+    minValue: Float
+): Offset {
+    return Offset(
+        x = calcXOffset(
+            canvasWidth = canvasSize.width,
+            dotSize = dotSize,
+            dataSize = dataSize,
+            index = index
+        ),
+        y = calcYOffset(
+            canvasHeight = canvasSize.height,
+            dotSize = dotSize,
+            value = value,
+            maxValue = maxValue,
+            minValue = minValue
+        )
+    )
+}
+
+private fun Density.calcXOffset(
     canvasWidth: Float,
     dotSize: Dp,
     dataSize: Int,
@@ -81,7 +125,7 @@ private fun DrawScope.calcXOffset(
     return (drawableWidth / (dataSize - 1) * index) + dotHalfSize.toPx()
 }
 
-private fun DrawScope.calcYOffset(
+private fun Density.calcYOffset(
     canvasHeight: Float,
     dotSize: Dp,
     value: Float,
