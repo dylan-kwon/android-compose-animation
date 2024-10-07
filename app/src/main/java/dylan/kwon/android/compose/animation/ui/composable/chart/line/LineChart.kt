@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import dylan.kwon.android.compose.animation.ui.theme.ComposeanimationTheme
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun LineChart(
@@ -40,8 +42,20 @@ fun LineChart(
     val minValue = remember(data) {
         data.flatMap { it.values }.minByOrNull { it } ?: 0f
     }
+    var dataState by remember(data) {
+        mutableStateOf(
+            data.map {
+                it.copy(
+                    values = it.values.map { 0f }.toImmutableList()
+                )
+            }
+        )
+    }
+    LaunchedEffect(data) {
+        dataState = data
+    }
     val animatedData = with(LocalDensity.current) {
-        data.map {
+        dataState.map {
             it.values.mapIndexed { index, value ->
                 animateOffsetAsState(
                     targetValue = calcOffset(
