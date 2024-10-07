@@ -14,4 +14,5 @@
     <string name="random">Random</string>
     <string name="circular_progress_bar">Circular ProgressBar</string>
     <string name="line_chart">Line Chart</string>
+    <string name="stacked_chart">Stacked Chart</string>
 </resources>

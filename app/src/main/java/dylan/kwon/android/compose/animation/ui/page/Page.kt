@@ -28,4 +28,7 @@ enum class Page(
     LineChart(
         nameResId = R.string.line_chart
     ),
+    StackedChart(
+        nameResId = R.string.stacked_chart
+    ),
 }
