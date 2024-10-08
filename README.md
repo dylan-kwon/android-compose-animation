@@ -12,4 +12,4 @@ Compose Animation Practice Project
 
 | [Counter](./app/src/main/java/dylan/kwon/android/compose/animation/ui/composable/counter/Counter.kt) |                                            |                                            |
 |------------------------------------------------------------------------------------------------------|--------------------------------------------|--------------------------------------------|
-| ![circular_progressbar](./image/circular_progressbar.gif)                                            | ![circular_progressbar](./image/blank.png) | ![circular_progressbar](./image/blank.png) | 
+| ![circular_progressbar](./image/counter.gif)                                                         | ![circular_progressbar](./image/blank.png) | ![circular_progressbar](./image/blank.png) | 
