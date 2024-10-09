@@ -31,4 +31,7 @@ enum class Page(
     StackedChart(
         nameResId = R.string.stacked_chart
     ),
+    Timer(
+        nameResId = R.string.timer
+    ),
 }
